@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKLOE - Soluções em Impressão 3D</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: #1a237e;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 150px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #a2a8f8;
+        }
+        
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(26, 35, 126, 0.7), rgba(26, 35, 126, 0.7)), url('./img/home1.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #f44336;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        .btn:hover {
+            background: #d32f2f;
+            transform: translateY(-3px);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #1a237e;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #f44336;
+        }
+        
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .service-card {
+            flex-basis: calc(33.33% - 30px);
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            color: #1a237e;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 126, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-overlay h3 {
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .testimonial-card {
+            flex-basis: calc(50% - 20px);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 60px;
+            color: #f44336;
+            position: absolute;
+            left: 0;
+            top: -15px;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .client-info img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        .cta {
+            background: #1a237e;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0.1);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-left-color: #1e293b;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        
+        footer {
+            background: #0e1142;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex-basis: calc(25% - 30px);
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #f44336;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 992px) {
+            .service-card {
+                flex-basis: calc(50% - 20px);
+            }
+            
+            .footer-column {
+                flex-basis: calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .service-card, .testimonial-card {
+                flex-basis: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+
+        /* Oculta o submenu inicialmente */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        /* Mostra o menu ao passar o mouse */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        /* Estilo dos links dentro do dropdown */
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 15px;
+            color: black;
+            text-decoration: none;
+        }
+        
+        /* Estilo ao passar o mouse nas opções */
+        .dropdown-menu li a:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Garante que o <li> com dropdown tenha position relativa */
+        .dropdown {
+            position: relative;
+        }
+  
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <img src="./img/logo.png" alt="Skloe Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                   <!--<li class="dropdown">
+                    <a href="#servicos">Serviços</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="voce.html">Para você</a></li>
+                      <li><a href="empresa.html">Para sua empresa</a></li>
+                    </ul>
+                  </li> -->
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <!-- <li><a href="#sobre">Sobre Nós</a></li> -->
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Transforme Ideias em Realidade com Impressão 3D</h1>
+            <p>Soluções criativas em impressão 3D para você e para empresas que buscam inovação, personalização e qualidade em suas peças.</p>
+            <a href="#contato" class="btn">Solicite um Orçamento</a>
+        </div>
+    </section>
+
+    <section id="servicos" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="./img/fidget_skloe.png" alt="Brindes Corporativos">
+                    </div>
+                    <div class="service-content">
+                        <h3>Brindes Corporativos</h3>
+                        <p>Personalizamos brindes em 3D que valorizam sua marca com criatividade e inovação. Perfeitos para eventos corporativos, campanhas promocionais e ações de relacionamento.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="./img/dragao.png" alt="Peças Decorativas">
+                    </div>
+                    <div class="service-content">
+                        <h3>Peças Decorativas</h3>
+                        <p>Criamos objetos decorativos personalizados para empresas e pessoas que valorizam estilo e exclusividade — ideais para escritórios, consultórios, ambientes corporativos ou sua casa.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="./img/tampa.png" alt="Modelos e Protótipos">
+                    </div>
+                    <div class="service-content">
+                        <h3>Modelos e Protótipos</h3>
+                        <p>Criamos protótipos, modelos de apresentação e peças técnicas ideais para reuniões, eventos, gravação a laser e outras finalidades profissionais.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section" style="background-color: #f5f5f5;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Portfólio</h2>
+            </div>
+            <div class="portfolio">
+                <div class="portfolio-item">
+                    <img src="./img/luminarias.png" alt="Projeto 1">
+                    <div class="portfolio-overlay">
+                        <h3>Luminárias Low Poly</h3>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <img src="./img/decorativas.png" alt="Projeto 2">
+                    <div class="portfolio-overlay">
+                        <h3>Peças Decorativas e Funcionais</h3>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <img src="./img/articulados_geral.png" alt="Projeto 3">
+                    <div class="portfolio-overlay">
+                        <h3>Brinquedos Articulados e Alados</h3>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <img src="./img/Gabaritos.png" alt="Projeto 4">
+                    <div class="portfolio-overlay">
+                        <h3>Projeto para empresa do setor industrial</h3>
+                    </div>
+                </div>
+                 <!-- <div class="portfolio-item">
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/400/300" alt="Projeto 5">
+                    <div class="portfolio-overlay">
+                        <h3>Porta-cartões personalizados para equipe comercial</h3>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/400/300" alt="Projeto 6">
+                    <div class="portfolio-overlay">
+                        <h3>Modelos arquitetônicos para apresentação de projeto</h3>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <section id="processo" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Como Trabalhamos</h2>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center;">
+                        <h3>1. Consultoria</h3>
+                        <p>Por meio de uma conversa direta e estratégica, identificamos as necessidades da sua empresa e criamos soluções em impressão 3D alinhadas aos seus objetivos.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center;">
+                        <h3>2. Desenvolvimento</h3>
+                        <p>Desenvolvemos o design e a modelagem 3D das peças e enviamos protótipos digitais para que você acompanhe e aprove cada etapa do projeto.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center;">
+                        <h3>3. Produção</h3>
+                        <p>Nossas impressoras 3D de alto desempenho garantem precisão, resistência e acabamento refinado em cada peça produzida.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center;">
+                        <h3>4. Entrega</h3>
+                        <p>Após o controle de qualidade, entregamos seu projeto finalizado no prazo acordado — com precisão, cuidado e compromisso com a sua satisfação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section" style="background-color: #f5f5f5;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Depoimentos</h2>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Estou encantada com o atendimento e profissionalismo da SKLOE! Desde o primeiro contato, a equipe demonstrou total dedicação em entender minha necessidade, revisando cada detalhe com atenção até chegarmos à escolha perfeita dos brindes. Além de sugerirem ótimas opções, sempre alinhadas ao meu objetivo, me mantiveram informada durante todo o processo de produção. Resultado: brindes lindos, de excelente qualidade e exatamente como eu esperava (ou até melhores!)."</p>
+                        <div class="client-info">
+                            <img src="/api/placeholder/60/60" alt="Cliente">
+                            <div>
+                                <h4>Géssica Neves</h4>
+                                <p>Psicóloga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"A parceria com a SKLOE foi essencial para aprimorar o nosso processo de gravação a laser. Eles desenvolveram um gabarito personalizado em impressão 3D que se encaixou perfeitamente às nossas necessidades, trazendo mais precisão, agilidade e padronização ao trabalho com placas de alumínio. O atendimento foi rápido, atencioso e altamente técnico. Com certeza, vamos continuar contando com eles em futuros projetos!"</p>
+                        <div class="client-info">
+                            <img src="/api/placeholder/60/60" alt="Cliente">
+                            <div>
+                                <h4>BPS Gravações</h4>
+                                <p>Diretoria</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section cta">
+        <div class="container">
+            <h2>Vamos criar algo incrível juntos?</h2>
+            <p>Entre em contato conosco para discutir seu projeto de impressão 3D. Estamos prontos para transformar suas ideias em realidade com soluções personalizadas e inovadoras.</p>
+            <a href="https://wa.me/5541988755971" class="btn">Fale Conosco</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Skloe</h3>
+                    <p>Soluções criativas em impressão 3D para empresas que buscam inovação e exclusividade — e para você que ama produtos originais, funcionais, divertidos e cheios de personalidade.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <!-- <li><a href="#sobre">Sobre Nós</a></li> -->
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul>
+                        <li><a href="#">Brindes Corporativos</a></li>
+                        <li><a href="#">Peças Decorativas</a></li>
+                        <li><a href="#">Protótipos</a></li>
+                        <li><a href="#">Modelos 3D</a></li>
+                        <li><a href="#">Personalizações</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li>
+                            <a href="https://wa.me/5541988755971" target="_blank" style="text-decoration: none; color: inherit;">
+                              <i class="fab fa-whatsapp"></i> 
+                            <a href="https://www.instagram.com/skloe.store" target="_blank" style="text-decoration: none; color: inherit;">
+                                <i class="fab fa-instagram"></i> 
+                            <a href="mailto:contato@skloe.com.br" target="_blank" style="text-decoration: none; color: inherit;">
+                                <i class="fas fa-envelope"></i> 
+                            </a>
+                            </a>
+                            </a>
+                        </li>
+                        <li>Email: contato@skloe.com.br</li>
+                        <li>
+                            <a href="https://g.page/r/CUYhTsHV2AKPEAI/review" target="_blank" style="text-decoration: none; color: inherit;">
+                              <i class="fab fa-google"></i> Avalie no Google
+                            </a>
+                        </li>
+                        <li>Endereço: Curitiba, Paraná</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Skloe - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/5541988755971?text=Olá! Gostaria de solicitar um orçamento para sua impressão em 3D na Skloe store." class="whatsapp-float" target="_blank">
+        <div class="whatsapp-tooltip">Fale conosco no WhatsApp</div>
+        <svg viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.384"></path>
+        </svg>
+    </a>
+</body>
+</html>
